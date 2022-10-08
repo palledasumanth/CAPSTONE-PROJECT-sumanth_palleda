@@ -1,0 +1,57 @@
+<app-header></app-header>
+<br><br><br>
+<div class="container">
+  <h4>Discounts</h4>
+  <div class="row">
+    <div class="col-sm-7">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Discounts Id</th>
+            <th>Discounts Name</th>
+            <th>Discounts Price</th>
+
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of list">
+            <td>1</td>
+            <td>One time Offer</td>
+            <td>40%</td>
+            <td>
+              <button (click)="deleteCat(cat.id)" class="btn btn-sm btn-danger">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-5">
+      <form [formGroup]="fg" (submit)="savecategory(fg.value)" novalidate>
+        <div class="form-group">
+          <label>Discounts Name</label>
+          <input
+            type="text"
+            formControlName="catname"
+            name="catname"
+            class="form-control"
+            placeholder="Discounts name"
+          />
+        </div>
+        <div class="form-group">
+            <label>Discounts Price</label>
+            <input
+              type="text"
+              formControlName="catname"
+              name="catname"
+              class="form-control"
+              placeholder="Discounts Price"
+            />
+          </div>
+        <button class="btn btn-primary">Save Discounts</button>
+      </form>
+    </div>
+  </div>
+</div>

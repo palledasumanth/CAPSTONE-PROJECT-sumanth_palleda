@@ -1,0 +1,152 @@
+<app-header></app-header>
+<br>
+<br>
+<br>
+<div class="container-fluid">
+  <h4>Products</h4>
+  <div class="row">
+    <div class="col-sm-8">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <!-- <th>photo</th> -->
+            <th>Product</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Stocks</th>
+            <th>Price</th>
+            <th>E-Mail</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of list">
+            <td>
+              <img
+                src="{{ p.photo }}"
+                style="width: 80px"
+                class="mr-2"
+              />{{ p.pname }}
+            </td>
+            <td>{{ p.category?.catname }}</td>
+            <td>{{ p.descr }}</td>
+            <td>{{ p.stocks }}</td>
+            <td>{{ p.price }}</td>
+            <td >
+              <button *ngIf="p.stocks<10"
+                (click)="EmailProduct()"
+                class="btn btn-primary btn-sm"
+              >
+               E-MAIL
+              </button>
+              <button *ngIf="p.stocks>10"
+              disabled
+                class="btn btn-primary btn-sm"
+              >
+               E-MAIL
+              </button>
+            </td>
+                        <td>
+              <button
+                (click)="deleteProduct(p.id)"
+                class="btn btn-danger btn-sm"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-4">
+      <h4>Add Product</h4>
+      <form [formGroup]="fg" (ngSubmit)="saveproduct()" novalidate>
+        <div class="form-group">
+          <label>Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="pname"
+            name="pname"
+          />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select
+            class="form-control"
+            formControlName="category"
+            name="category"
+          >
+            <option value="">Select Category</option>
+            <option *ngFor="let c of cats" value="{{ c.id }}">
+              {{ c.catname }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="descr"
+            name="descr"
+          />
+        </div>
+        <div class="form-group">
+          <label>No. Of Stocks</label>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="stocks"
+            name="stocks"
+          />
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <input
+            type="number"
+            min="1"
+            class="form-control"
+            formControlName="price"
+            name="price"
+          />
+        </div>
+        <div class="form-group">
+          <label>Product Name</label>
+          <input
+            type="file"
+            class="form-control"
+            formControlName="pic"
+            (change)="saveFile($event)"
+            accept=".jpg,.png,.jpeg"
+            name="pic"
+          />
+        </div>
+        <input type="submit" value="Save Product" class="btn btn-primary" />
+      </form>
+
+      <br>
+      <h3>OR</h3>
+    <form [formGroup]="csv" (ngSubmit)="onSubmit()">
+       
+        <div class="form-group">
+          <label>Upload CSV File Here</label>
+          <input
+            type="file"
+            class="form-control"
+            formControlName="csvf"
+            (change)="savecsv($event)"
+           
+           
+          />
+        </div>
+        <input type="submit" value="Save Product" class="btn btn-primary" />
+
+      </form> 
+
+
+
+
+    </div>
+  </div>
+</div>

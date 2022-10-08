@@ -1,0 +1,14 @@
+.carousel-inner img{
+    position: relative;
+
+    /* width:75%; */
+    /* max-height: 450px !important; */
+  }
+  h5,p{
+    color: whitesmoke;
+  }
+
+  .item
+{ position: relative;
+    text-align: center;
+}
